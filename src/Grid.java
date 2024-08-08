@@ -2,35 +2,21 @@ import java.awt.Graphics;
 import java.awt.Point;
 
 public class Grid {
-    public Cell[][] cells;
-    int rows;
-    int cols;
-
-    public Grid(int rows, int cols, int cellSize) {
-        this.rows = rows;
-        this.cols = cols;
-        cells = new Cell[rows][cols];
-
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                cells[i][j] = new Cell(i * cellSize + 10, j * cellSize + 10, cellSize);
-            }
-        }
+  Cell[][] cells = new Cell[20][20];
+  
+  public Grid() {
+    for(int i=0; i<cells.length; i++) {
+      for(int j=0; j<cells[i].length; j++) {
+        cells[i][j] = new Cell(10+Cell.size*i, 10+Cell.size*j);
+      }
     }
+  }
 
-    public void draw(Graphics g) {
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                cells[i][j].draw(g);
-            }
-        }
+  public void paint(Graphics g, Point mousePosition) {
+    for(int i=0; i<cells.length; i++) {
+      for(int j=0; j<cells[i].length; j++) {
+        cells[i][j].paint(g, mousePosition);
+      }
     }
-
-    public void updateHighlight(Point mousePosition) {
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                cells[i][j].setHighlighted(cells[i][j].contains(mousePosition));
-            }
-        }
-    }
+  }
 }
