@@ -1,11 +1,9 @@
 import java.awt.Dimension;
-import java.awt.Graphics;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-
+import java.awt.Graphics;
 public class Main extends JFrame {
-
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         Main window = new Main();
     }
 
@@ -14,12 +12,18 @@ public class Main extends JFrame {
 
         public Canvas() {
             setPreferredSize(new Dimension(720, 720));
+            addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+                public void mouseMoved(java.awt.event.MouseEvent e) {
+                    grid.updateMouseTrail(e.getPoint());
+                    repaint();
+                }
+            });
         }
 
+        @Override
         public void paintComponent(Graphics g) {
             super.paintComponent(g);
             grid.paint(g, getMousePosition());
-            repaint();
         }
     }
 

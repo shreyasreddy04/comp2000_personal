@@ -3,17 +3,16 @@ import java.awt.Graphics;
 import java.awt.Point;
 
 public class Cell {
-    int x;
-    int y;
     static int size = 35;
+    private int x, y;
 
-    public Cell(int inX, int inY) {
-        x = inX;
-        y = inY;
+    public Cell(int x, int y) {
+        this.x = x;
+        this.y = y;
     }
 
     public void paint(Graphics g, Point mousePos) {
-        if (contains(mousePos)) {
+        if (mousePos != null && contains(mousePos)) {
             g.setColor(Color.GRAY);
         } else {
             g.setColor(Color.WHITE);
@@ -23,11 +22,10 @@ public class Cell {
         g.drawRect(x, y, size, size);
     }
 
-    public boolean contains(Point mousePointer) {
-        if (mousePointer != null) {
-            return x < mousePointer.x && x + size > mousePointer.x && y < mousePointer.y && y + size > mousePointer.y;
-        } else {
+    private boolean contains(Point p) {
+        if (p == null) {
             return false;
         }
+        return p.x >= x && p.x < x + size && p.y >= y && p.y < y + size;
     }
 }
