@@ -34,11 +34,12 @@ public class Grid {
     }
 
     private void drawMouseTrail(Graphics g) {
-        for (Point p : mouseTrail) {
+        for (int i = 0; i < mouseTrail.size(); i++) {
+            Point p = mouseTrail.get(i);
             if (p != null) {
-                g.setColor(new Color(255, 0, 0, 128)); // Semi-transparent red
-                g.fillOval(p.x - 10, p.y - 10, 20, 20);
+                g.setColor(new Color(50, 50, 50, 100));
+                g.fillOval(p.x - 10, p.y - 10, 15, 15);
             }
-        }
+        }        
     }
 }
