@@ -1,16 +1,19 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Point;
+import java.awt.Rectangle;
 
-public class Cell {
-  int x;
-  int y;
+public class Cell extends Rectangle {
   static int size = 35;
+  char col;
+  int row;
 
-  public Cell(int inX, int inY) {
-    x = inX;
-    y = inY;
+  public Cell(char inCol, int inRow, int x, int y) {
+    super(x, y, size, size);
+    col = inCol;
+    row = inRow;
   }
+
   public void paint(Graphics g, Point mousePos) {
     if(contains(mousePos)) {
       g.setColor(Color.GRAY);
@@ -22,11 +25,20 @@ public class Cell {
     g.drawRect(x, y, size, size);
   }
 
+  @Override
   public boolean contains(Point p) {
     if(p != null) {
-      return x < p.x && x+size > p.x && y < p.y && y+size > p.y;
+      return super.contains(p);
     } else {
       return false;
     }
+  }
+
+  public int leftOfComparison(Cell c) {
+    return Character.compare(col, c.col);
+  }
+
+  public int aboveComparison(Cell c) {
+    return Integer.compare(row, c.row);
   }
 }
